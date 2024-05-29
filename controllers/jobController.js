@@ -18,7 +18,7 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
 
   
-  if (role === "Job Seeker") {
+  if (role === "Applicant") {
     return next(
       new ErrorHandler("Protected Route for Recruiter.", 400)
     );
@@ -28,6 +28,7 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
     title,
     description,
     category,
+    jobId,
     country,
     city,
     location,
@@ -37,7 +38,7 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
 
   }  = req.body;
 
-  if (!title || !description || !category || !country || !city || !location) {
+  if (!title || !description || !category || !country || !city || !location || !jobId) {
     return next(new ErrorHandler("Please provide full job details.", 400));
   }
 
@@ -64,6 +65,7 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
     title,
     description,
     category,
+    jobId,
     country,
     city,
     location,

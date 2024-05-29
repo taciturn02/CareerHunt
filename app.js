@@ -8,12 +8,14 @@ import applicationRouter from './routes/applicationRouter.js';
 import jobRouter from './routes/jobRouter.js';
 import {dbConnect} from './database/dbConnection.js';
 import {errorMiddleware} from './middlewares/error.js'
+import {cloudinaryConnect} from "./cloudinary/cloudinary.js"
 
 const app = express();
 dotenv.config();
 
 //DATABASE CONNECTION
 dbConnect();
+cloudinaryConnect();
 
 
 
