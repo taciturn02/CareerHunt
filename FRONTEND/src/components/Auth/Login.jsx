@@ -1,4 +1,3 @@
-import React, { useContext, useState } from "react";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import { Link, Navigate } from "react-router-dom";
@@ -7,14 +6,20 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
 
+import React, { useContext, useState } from "react";
+
 const Login = () => {
+
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+
   const [role, setRole] = useState("");
 
   const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const handleLogin = async (e) => {
+
     e.preventDefault();
     try {
       console.log("hello");
@@ -37,10 +42,13 @@ const Login = () => {
     } catch (error) {
       toast.error(error.response.data.message);
     }
+
   };
 
   if(isAuthorized){
+
     return <Navigate to={'/'}/>
+
   }
 
   return (
@@ -76,6 +84,7 @@ const Login = () => {
               </div>
             </div>
             <div className="inputTag">
+              
               <label>Password</label>
               <div>
                 <input
