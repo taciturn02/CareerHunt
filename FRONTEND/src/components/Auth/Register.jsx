@@ -8,12 +8,15 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
-
 const Register = () => {
+
   const [email, setEmail] = useState("");
+
   const [name, setName] = useState("");
+
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+
   const [role, setRole] = useState("");
 
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
@@ -25,6 +28,7 @@ const Register = () => {
     try {
    
       const { data } = await axios.post(
+
         "http://localhost:4000/api/v1/user/signup",
         { name, phone, email, role, password },
         {
@@ -78,6 +82,7 @@ const Register = () => {
                 <FaRegUser />
               </div>
             </div>
+
             <div className="inputTag">
               <label>Name</label>
               <div>
@@ -88,6 +93,7 @@ const Register = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
                 <FaPencilAlt />
+
               </div>
             </div>
             <div className="inputTag">
@@ -132,9 +138,13 @@ const Register = () => {
 
             <Link to={"/login"}>Login Now</Link>
           </form>
+
         </div>
+
         <div className="banner">
+
           <img src="/register.jpg" alt="login" />
+          
         </div>
       </section>
     </>
