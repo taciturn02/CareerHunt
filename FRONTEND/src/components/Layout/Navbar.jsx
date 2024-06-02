@@ -1,13 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../main";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { GiHamburgerMenu } from "react-icons/gi";
+import React, { useContext, useEffect, useState } from "react";
+
 
 const Navbar = () => {
+
   const [show, setShow] = useState(false);
+
   const { isAuthorized, setIsAuthorized, user } = useContext(Context);
+
   const navigateTo = useNavigate();
 
   const handleLogout = async () => {
@@ -28,6 +32,7 @@ const Navbar = () => {
 
   return (
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
+
       <div className="container">
         <div className="hello">
            <h1> CareerHunt</h1>
@@ -69,6 +74,7 @@ const Navbar = () => {
 
           <button onClick={handleLogout}>LOGOUT</button>
         </ul>
+        
         <div className="hamburger">
 
           <GiHamburgerMenu onClick={() => setShow(!show)} />
