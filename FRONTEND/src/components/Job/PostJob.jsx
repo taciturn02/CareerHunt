@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
 const PostJob = () => {
-  const [title, setTitle] = useState("");
   const [jobId, setJobId] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -15,10 +14,11 @@ const PostJob = () => {
   const [salaryTo, setSalaryTo] = useState("");
   const [fixedSalary, setFixedSalary] = useState("");
   const [salaryType, setSalaryType] = useState("default");
-
+  const [title, setTitle] = useState("");
   const { isAuthorized, user } = useContext(Context);
 
   const handleJobPost = async (e) => {
+
     e.preventDefault();
     if (salaryType === "Fixed Salary") {
       setSalaryFrom("");
@@ -29,9 +29,11 @@ const PostJob = () => {
       setSalaryFrom("");
       setSalaryTo("");
       setFixedSalary("");
+
     }
     await axios
       .post(
+
         "http://localhost:4000/api/v1/job/post",
         fixedSalary.length >= 4
           ? {
@@ -62,6 +64,7 @@ const PostJob = () => {
           },
         }
       )
+
       .then((res) => {
         toast.success(res.data.message);
         navigateTo("/job/getall");
@@ -72,6 +75,7 @@ const PostJob = () => {
   };
 
   const navigateTo = useNavigate();
+
   if (!isAuthorized || (user && user.role !== "Recruiter")) {
     navigateTo("/");
   }
@@ -89,6 +93,7 @@ const PostJob = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Job Title"
               />
+
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -120,6 +125,7 @@ const PostJob = () => {
                 <option value="Data Entry Operator">Data Entry Operator</option>
               </select>
             </div>
+
             <div className="wrapper">
             <input
                 type="number"
@@ -146,6 +152,7 @@ const PostJob = () => {
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
             />
+            
             <div className="salary_wrapper">
               <select
                 value={salaryType}
