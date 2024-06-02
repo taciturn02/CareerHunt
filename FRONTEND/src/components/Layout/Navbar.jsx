@@ -29,8 +29,8 @@ const Navbar = () => {
   return (
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
       <div className="container">
-        <div className="logo">
-          <img src="/JobZee-logos__white.png" alt="logo" />
+        <div className="hello">
+           <h1> CareerHunt</h1>
         </div>
         <ul className={!show ? "menu" : "show-menu menu"}>
           <li>
@@ -70,7 +70,9 @@ const Navbar = () => {
           <button onClick={handleLogout}>LOGOUT</button>
         </ul>
         <div className="hamburger">
+
           <GiHamburgerMenu onClick={() => setShow(!show)} />
+          
         </div>
       </div>
     </nav>
