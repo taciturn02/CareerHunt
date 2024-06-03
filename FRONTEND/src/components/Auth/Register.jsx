@@ -16,10 +16,35 @@ const Register = () => {
 
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [otp, setOTP] = useState("");
 
   const [role, setRole] = useState("");
 
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+
+  const otpgenerator = async (e)=>{
+    e.preventDefault();
+    try {
+   
+      const { data } = await axios.post(
+
+        "http://localhost:4000/api/v1/user/sendotp",
+        { name, phone, email, role, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      toast.success(data.message);
+
+    } catch (error) {
+
+      toast.error(error.response.data.message);
+
+    }
+  }
 
   const handleRegister = async (e) => {
 
@@ -30,7 +55,7 @@ const Register = () => {
       const { data } = await axios.post(
 
         "http://localhost:4000/api/v1/user/signup",
-        { name, phone, email, role, password },
+        { name, phone, email, role, password ,otp},
         {
           headers: {
             "Content-Type": "application/json",
@@ -128,6 +153,21 @@ const Register = () => {
                   placeholder="Enter Your Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                />
+                
+              </div>
+            </div>
+            <button type="submit" onClick={otpgenerator}>
+              GenerateOTP
+            </button>
+            <div className="inputTag">
+              <label>OTP</label>
+              <div>
+                <input
+                  type="number"
+                  placeholder=""
+                  value={otp}
+                  onChange={(e) => setOTP(e.target.value)}
                 />
                 <RiLock2Fill />
               </div>

@@ -16,6 +16,7 @@ import MyApplication from "./components/Application/MyApplication";
 import PostJob from "./components/Job/PostJob";
 import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
+import ForgotPassword from "./components/Auth/ForgotPassword";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/applications/me" element={<MyApplication />} />
           <Route path="/job/post" element={<PostJob />} />
           <Route path="/job/me" element={<MyJobs />} />
+          <Route path="/forgot/:email" element={<ForgotPassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

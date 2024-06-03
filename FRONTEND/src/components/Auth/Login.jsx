@@ -5,18 +5,55 @@ import { FaRegUser } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
-
+import { useNavigate } from "react-router-dom";
 import React, { useContext, useState } from "react";
+import ForgotPassword from "./ForgotPassword";
+
+
 
 const Login = () => {
 
+  const navigateTo = useNavigate();
+
   const [email, setEmail] = useState("");
+
+  const [otp, setotp] = useState("");
 
   const [password, setPassword] = useState("");
 
   const [role, setRole] = useState("");
 
   const { isAuthorized, setIsAuthorized } = useContext(Context);
+
+
+  const handleForgot = async (e)=>{
+      e.preventDefault();
+      try {
+   
+        const { data } = await axios.post(
+  
+          "http://localhost:4000/api/v1/user/sendotp",
+          { email},
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+        toast.success(data.message);
+
+        navigateTo(
+          `/forgot/${email}`
+        );
+  
+      } catch (error) {
+  
+        toast.error(error.response.data.message);
+
+      }
+    
+  }
 
   const handleLogin = async (e) => {
 
@@ -44,6 +81,8 @@ const Login = () => {
     }
 
   };
+
+
 
   if(isAuthorized){
 
@@ -98,6 +137,9 @@ const Login = () => {
             </div>
             <button type="submit" onClick={handleLogin}>
               Login
+            </button>
+            <button type="submit" onClick={handleForgot}>
+              Forgot Password
             </button>
             <Link to={"/register"}>Register Now</Link>
           </form>
