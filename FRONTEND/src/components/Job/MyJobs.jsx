@@ -117,6 +117,23 @@ return (
                       />
                     </div>
                     <div>
+                      <span>JobID:</span>
+                      <input
+                        type="text"
+                        disabled={
+                          editingMode !== element._id ? true : false
+                        }
+                        value={element.jobId}
+                        onChange={(e) =>
+                          handleInputChange(
+                            element._id,
+                            "jobId",
+                            e.target.value
+                          )
+                        }
+                      />
+                    </div>
+                    <div>
                       {" "}
                       <span>Country:</span>
                       <input
@@ -151,6 +168,7 @@ return (
                         }
                       />
                     </div>
+                    
                     <div>
                       <span>Category:</span>
                       <select

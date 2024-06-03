@@ -67,7 +67,7 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
   if (!jobDetails) {
     return next(new ErrorHandler("Job not found!", 404));
   }
-  // console.log(jobDetails);
+  console.log(jobDetails);
   // console.log(jobDetails.title);
   // console.log(jobDetails.postedBy.populate('postedBy'));
 
@@ -95,6 +95,7 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     address,
     applicantID,
     employerID,
+    jobId,
     resume: {
       public_id: response.public_id,
       url: response.secure_url,

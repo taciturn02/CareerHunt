@@ -86,9 +86,9 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
 
 export const getMyJobs = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
-  if (role === "Job Seeker") {
+  if (role === "Applicant") {
     return next(
-      new ErrorHandler("Job Seeker not allowed to access this resource.", 400)
+      new ErrorHandler("Applicant not allowed to access this resource.", 400)
     );
   }
   const myJobs = await Job.find({ postedBy: req.user._id });
@@ -101,13 +101,14 @@ export const getMyJobs = catchAsyncErrors(async (req, res, next) => {
 
 export const updateJob = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
-  if (role === "Job Seeker") {
+  if (role === "Applicant") {
     return next(
-      new ErrorHandler("Job Seeker not allowed to access this resource.", 400)
+      new ErrorHandler("Applicant not allowed to access this resource.", 400)
     );
   }
   const { id } = req.params;
   let job = await Job.findById(id);
+
   if (!job) {
     return next(new ErrorHandler(" Job not found.", 404));
   }
@@ -128,9 +129,9 @@ export const updateJob = catchAsyncErrors(async (req, res, next) => {
 export const deleteJob = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
 
-  if (role === "Job Seeker") {
+  if (role === "Applicant") {
     return next(
-      new ErrorHandler("Job Seeker not allowed to access this resource.", 400)
+      new ErrorHandler("Applicant not allowed to access this resource.", 400)
     );
   }
 
@@ -139,7 +140,7 @@ export const deleteJob = catchAsyncErrors(async (req, res, next) => {
   const job = await Job.findById(id);
 
   if (!job) {
-    return next(new ErrorHandler("OOPS! Job not found.", 404));
+    return next(new ErrorHandler("Job not found.", 404));
   }
 
   await job.deleteOne();
