@@ -20,6 +20,10 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     required: [true, "Enter your Address!"],
   },
+  jobId : {
+    type:Number,
+    required : true
+  },
   resume: {
     public_id: {
       type: String, 
@@ -30,6 +34,7 @@ const applicationSchema = new mongoose.Schema({
       required: true,
     },
   },
+
   applicantID: {
     user: {
       type: mongoose.Schema.Types.ObjectId,
